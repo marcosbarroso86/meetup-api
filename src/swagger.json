@@ -1,0 +1,181 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Meetup API REST",
+        "version": "1.0.0",
+        "description": "API Rest aplicativo para meetups"        
+    },
+    "basePath": "/api",
+    "tags": [ {
+        "name": "Meetups",
+        "description": "Todo acerca de Meetups"
+    }],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+
+        "/meetups": {
+            "get": {
+                "tags": [
+                    "Meetups"
+                ],
+                "summary": "Obtiene todas las meetups",
+                "operationId": "obtenerMeetups",
+                "produces": [
+                    "application/json"
+                ],
+                "description": "Retorna todas las meetups.",
+                "responses": {
+                    "200": {
+                        "description": "Reportes de meetups",
+                        "schema": {
+                            "$ref": "#/definitions/meetups"
+                        }
+                    },
+                    "405": {
+                        "description": "Error de validación"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Meetups"
+                ],
+                "summary": "Crear meetups",
+                "operationId": "crearMeetup",
+                "produces": [
+                    "application/json"
+                ],
+                "description": "Crear meetups.",
+                "parameters": [
+                    {   "name": "meetup",
+                        "in": "body",
+                        "description": "Post meetups",
+                        "required": true,
+                        "schema": {
+                          "$ref": "#/definitions/meetup"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post meetups",
+                        "schema": {
+                            "$ref": "#/definitions/meetup"
+                        }
+                    },
+                    "405": {
+                        "description": "Error de validación"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                }
+            }
+            
+        },
+        "/meetups/:id" : {
+            "put" : {
+                "tags": [
+                    "Meetups"
+                ],
+                "summary": "Actualizar meetups",
+                "operationId": "actualizarMeetup",
+                "produces": [
+                    "application/json"
+                ],
+                "description": "Actualizar meetups.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la meetup",
+                        "type": "integer",
+                        "format": "int64",
+                        "required": true
+
+                    },
+                    { 
+                        "name": "meetup",
+                        "in": "body",
+                        "description": "body meetup",
+                        "required": true,
+                        "schema": {
+                          "$ref": "#/definitions/meetup"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Put meetups",
+                        "schema": {
+                            "$ref": "#/definitions/meetup"
+                        }
+                    },
+                    "405": {
+                        "description": "Error de validación"
+                    },
+                    "500": {
+                        "description": "Error interno del servidor"
+                    }
+                }
+            }
+        }
+        
+
+    },
+    "definitions": {
+        "meetup": {
+            "type": "object",
+            "properties": {
+                "id":{
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "currentDate": {
+                    "type": "string"
+                },
+                "guests": {
+                    "type": "number"
+                },
+                "place": {
+                    "type": "string"
+                },
+                "beerCrates": {
+                    "type": "number"
+                }, 
+                "users" : {
+                    "type": "array",
+                    "items":  {
+                        "$ref": "#/definitions/user"
+                    }
+                        
+                }
+               
+            }
+        },
+        "user": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password" : {
+                    "type" : "string"
+                }
+            }
+        },
+        "meetups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/meetup"
+          }
+        }
+    }
+}

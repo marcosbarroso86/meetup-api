@@ -1,1 +1,1 @@
-# meetup-api
+# node-typeorm
