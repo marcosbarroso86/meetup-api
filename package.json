@@ -47,6 +47,5 @@
   "scripts": {
     "start": "node node_modules/gulp/bin/gulp.js start-dev",
     "build": "node node_modules/gulp/bin/gulp.js prod"
-    
   }
 }

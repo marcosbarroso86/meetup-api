@@ -28,7 +28,8 @@ export class MeetupService {
                 document.data().guests,
                 document.data().place,
                 document.data().beerCrates,
-                document.data().users )
+                document.data().users, 
+                document.data().weather)
             meetups.push(meetup);
         });
         return filter ? meetups.filter( meetup => meetup.title.includes(filter)) : meetups;
@@ -44,10 +45,9 @@ export class MeetupService {
         const meetupRef = this.firestore.collection(Constants.MEETUP_COLLECTION);
 
         await meetupRef.doc(id)
-            .update({
-                users 
-            })
-       
+            .update(
+                users
+            )
     }
 
     public getBeerCrates = (temperature: number , persons: number) => {

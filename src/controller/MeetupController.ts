@@ -12,7 +12,7 @@ export class MeetupController {
     public getMeetups = (req:Request , res:Response) => {
         const { title } = req.query || null;
         this.service.getMeetups(title)
-            .then( response => res.send(response) )
+            .then( response => res.send(response)  )
             .catch( e => res.send(e))
     }
 
